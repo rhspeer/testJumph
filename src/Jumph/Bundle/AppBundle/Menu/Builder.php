@@ -103,7 +103,7 @@ class Builder extends ContainerAware
         usort($menuItems, array($this, 'menuSort'));
 
         $newMenuOrder = array();
-        foreach ($menuItems as $menuItem) {
+        foreach($menuItems as $menuItem) {
             $newMenuOrder[] = $menuItem->getName();
         }
 
