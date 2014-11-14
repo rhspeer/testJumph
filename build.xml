@@ -2,7 +2,7 @@
 <project name="Jumph" default="build">
  <property name="toolsdir" value="bin/" />
  <target name="build"
-         depends="prepare,copy-parameters,bower,composer,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox"
+         depends="prepare,copy-parameters,bower,composer,jshint,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox"
          description=""/>
 
  <target name="build-parallel"
@@ -65,6 +65,16 @@
  <target name="bower" description="Installing bower dependencies">
   <exec executable="bower" failonerror="true">
    <arg value="install" />
+  </exec>
+ </target>
+
+ <target name="jshint" description="Run the JSHint tool on JavaScript files">
+  <fileset dir="${basedir}/src" id="jsfiles.raw">
+    <include name="**/*.js" />
+  </fileset>
+  <pathconvert pathsep=" " property="jsfiles.clean" refid="jsfiles.raw" />
+  <exec executable="jshint" output="${basedir}/build/logs/jshint.xml">
+    <arg line="--reporter=jslint ${jsfiles.clean}" />
   </exec>
  </target>
 
