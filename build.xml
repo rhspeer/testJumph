@@ -2,7 +2,7 @@
 <project name="Jumph" default="build">
  <property name="toolsdir" value="bin/" />
  <target name="build"
-         depends="prepare,copy-parameters,bower,composer,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox"
+         depends="prepare,copy-parameters,bower,composer,csslint,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox"
          description=""/>
 
  <target name="build-parallel"
@@ -66,6 +66,16 @@
   <exec executable="bower" failonerror="true">
    <arg value="install" />
   </exec>
+ </target>
+
+ <target name="csslint" description="Run the CSSLint tool on CSS files">
+	<fileset dir="${basedir}/src" id="cssfiles.raw">
+	  <include name="**/*.css" />
+	</fileset>
+	<pathconvert pathsep=" " property="cssfiles.clean" refid="cssfiles.raw" />
+	<exec executable="csslint" output="${basedir}/build/logs/csslint.xml">
+	  <arg line="--warnings=box-model,floats --errors=ids,important --format=lint-xml ${cssfiles.clean}" />
+	</exec>
  </target>
 
  <target name="lint" description="Perform syntax check of sourcecode files">
