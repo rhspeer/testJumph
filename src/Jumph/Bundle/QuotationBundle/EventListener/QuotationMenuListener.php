@@ -17,6 +17,8 @@ class QuotationMenuListener
 {
     /**
      * @param BuildMenuEvent $event
+     * 
+     * @todo Activate when module is done
      */
     public function onMenuQuotation(BuildMenuEvent $event)
     {
