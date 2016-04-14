@@ -29,7 +29,7 @@ app/config/deploy.rb
 !build/phpmd.xml
 !build/phpunit.xml
 !build/phpdox.xml
-build/*
+#build/*
 .idea/.name
 
 .idea/encodings.xml
